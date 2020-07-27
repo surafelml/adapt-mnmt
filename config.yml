@@ -1,0 +1,74 @@
+model_dir: model
+
+
+data:
+  train_features_file: train.src        
+  train_labels_file: train.tgt         
+  eval_features_file: dev.src         
+  eval_labels_file: dev.tgt          
+  source_words_vocabulary: vocab.src
+  target_words_vocabulary: vocab.tgt
+
+
+params:
+  beam_width: 5
+  maximum_iterations: 250
+  average_loss_in_time: true
+  label_smoothing: 0.1
+  length_penalty: 0.6
+
+  optimizer: LazyAdamOptimizer
+  optimizer_params:
+    beta1: 0.9
+    beta2: 0.998
+  learning_rate: 2.0            # The learning rate scale constant.
+  decay_type: noam_decay
+  decay_rate: 512 
+  decay_step_duration: 8        # 2 - changed to 8 for using 1GPU  # 1 decay step is 2 training steps.
+  decay_steps: 8000             # Warmup steps (= 16000 training steps).
+  start_decay_steps: 0          # 16000
+
+
+# (optional) to load sub-components of the network, use --checkpoint_path
+load_weights:
+  encoder: true
+  decoder: true
+  shared_embs: true
+  src_embs: true
+  tgt_embs: true
+  projection: true
+  optim: true
+  global_step: true
+  words_per_sec: true           # not in lstm models
+
+
+train:
+  batch_size: 4096
+  batch_type: tokens
+  bucket_width: 5
+  save_checkpoints_steps: 1000  # update accordingly 
+  keep_checkpoint_max: 10
+  save_summary_steps: 50
+  train_steps: 500000           # small-models 60000 steps, 200k training examples 100000 steps
+  sample_buffer_size: 5000000
+  maximum_features_length: 100  
+  maximum_labels_length: 100
+
+
+eval:
+  batch_size: 32
+  num_threads: 10               # default 1
+  bucket_width: 5
+  prefetch_buffer_size: 1
+  n_best: 1
+  with_scores: false
+  with_alignments: null 
+  external_evaluators: BLEU     # sacreBLEU, BLEU, BLEU-detok, ROUGE
+  exporters: last 
+  steps: 100                    # 100 (default)
+  start_delay_secs: 1           # 120 (default)
+  eval_delay: 1800              # every 1/2 hour  | throttle_secs: 60 # 600 (default)  
+
+
+infer:
+  batch_size: 32
