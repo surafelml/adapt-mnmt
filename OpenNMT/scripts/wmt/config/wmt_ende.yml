@@ -1,0 +1,19 @@
+model_dir: wmt_ende_transformer
+
+data:
+  train_features_file: data/train.en
+  train_labels_file: data/train.de
+  eval_features_file: data/valid.en
+  eval_labels_file: data/valid.de
+  source_words_vocabulary: data/wmtende.vocab
+  target_words_vocabulary: data/wmtende.vocab
+
+train:
+  save_checkpoints_steps: 1000
+
+eval:
+  eval_delay: 3600  # Every 1 hour
+  external_evaluators: BLEU
+
+infer:
+  batch_size: 32

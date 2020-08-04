@@ -140,19 +140,18 @@ __Note__: to replicate the experiments reported in our work, please see further 
 
 ### References 
 ---
-
 ```bibtext 
 @article{lakew2018transfer,
-  title={Transfer learning in multilingual neural machine translation with dynamic vocabulary},
-  author={Lakew, Surafel M and Erofeeva, Aliia and Negri, Matteo and Federico, Marcello and Turchi, Marco},
-  journal={arXiv preprint arXiv:1811.01137},
-  year={2018}
+title={Transfer learning in multilingual neural machine translation with dynamic vocabulary},
+author={Lakew, Surafel M and Erofeeva, Aliia and Negri, Matteo and Federico, Marcello and Turchi, Marco},
+journal={arXiv preprint arXiv:1811.01137},
+year={2018}
 }
 
 @article{lakew2019adapting,
-  title={Adapting Multilingual Neural Machine Translation to Unseen Languages},
-  author={Lakew, Surafel M and Karakanta, Alina and Federico, Marcello and Negri, Matteo and Turchi, Marco},
-  journal={arXiv preprint arXiv:1910.13998},
-  year={2019}
+title={Adapting Multilingual Neural Machine Translation to Unseen Languages},
+author={Lakew, Surafel M and Karakanta, Alina and Federico, Marcello and Negri, Matteo and Turchi, Marco},
+journal={arXiv preprint arXiv:1910.13998},
+year={2019}
 }
 ```
